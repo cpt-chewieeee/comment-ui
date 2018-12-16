@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -15,7 +14,8 @@ import Footer from './components/footer';
 import List from './components/list';
 import { connect } from 'react-redux';
 import AddComment from './components/addComment';
-import { closeAddComment } from './redux/actions/events'
+import { closeAddComment } from './redux/actions/events';
+import { fetchAllComments } from './redux/actions/comments';
 
 const styles = theme => ({
   root: {
@@ -51,6 +51,9 @@ class App extends Component {
     classes: PropTypes.object.isRequired,
     openAddComment: PropTypes.bool.isRequired,
     closeAddComment: PropTypes.func.isRequired
+  }
+  componentDidMount () {
+    this.props.fetchAllComments()
   }
   render() {
     console.log(this.props)
@@ -90,12 +93,13 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log('->', state)
+  // console.log('->', state)
   return {
     openAddComment: state.eventsStore.openAddComment
   }
 }
 const mapDispatchToProps = {
-  closeAddComment
+  closeAddComment,
+  fetchAllComments
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));

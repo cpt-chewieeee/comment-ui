@@ -42,7 +42,6 @@ class Footer extends Component {
           <Fab color="secondary" aria-label="Add" className={classes.fabButton} onClick={addComment}>
             <AddIcon/>
           </Fab>
-          
         </Toolbar>
       </AppBar>
     )
