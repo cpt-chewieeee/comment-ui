@@ -2,17 +2,15 @@ import {
   GET_ALL_COMMENTS_SUCCESS 
 } from '../actions/comments'
 const STATE = {
-  // originalComments: []
-  comments: [],
-  // firstLevel: 
+  comments: {},
+
 }
 
 const ACTION_HANDLERS = {
   [GET_ALL_COMMENTS_SUCCESS]: (state, action) => {
-    console.log('====>', action.payload)
     return {
       ...state,
-      // originalComments: action.payload.original
+      comments: action.payload
     }
   }
 }

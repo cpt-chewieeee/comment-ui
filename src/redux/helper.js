@@ -10,14 +10,15 @@ const findSecondLevelComments = (firstLevel, comments) => {
   return Promise.resolve(firstLevel)
 }
 const getParents = (currentIndex, comments) => {
-
   const parents = []
   let refId = comments[currentIndex].refComment
+
+  function compareById(item) {
+    return item.id === refId
+  }
   while(refId !== null) {
     parents.push(refId)
-    const next = comments.find(item => {
-      return item.id === refId
-    })
+    const next = comments.find(compareById)
     refId = next.refComment
   }
   return parents
@@ -54,13 +55,10 @@ export const parseComments = (comments) => {
       }
     }
   }, {})
-
+  /* using reference */
   return findSecondLevelComments(firstLevel, comments).then(() => {
     findThirdLevelComments(firstLevel, comments)
     return firstLevel
   })
-  
 
-
-  // return firstLevel
 }

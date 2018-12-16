@@ -56,7 +56,7 @@ class App extends Component {
     this.props.fetchAllComments()
   }
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const { classes, openAddComment, closeAddComment } = this.props
     return (
       
@@ -93,7 +93,7 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  // console.log('->', state)
+  console.log('->', state.eventsStore)
   return {
     openAddComment: state.eventsStore.openAddComment
   }
