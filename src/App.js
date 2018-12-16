@@ -83,7 +83,6 @@ class App extends Component {
     return (
       
         <div className={classes.root}>
-          <img src={'javascript:alert("XSS");'} />
           <Paper className='main-container'>
             <Typography className='header' variant='h5' gutterBottom>
               Comments
