@@ -29,10 +29,16 @@ export const handleTextFieldChange = (type, value) => ({
 })
 export const handleSubmit = () => (dispatch, getState) => {
   const state = getState().eventsStore
-  const { comment, userName } = state
+  const { comment, userName, rootId, parentId } = state
   console.log(state)
   return dispatch({
-    type: HANDLE_SUBMIT
+    type: HANDLE_SUBMIT,
+    payload: {
+      comment, 
+      userName,
+      rootId,
+      parentId
+    }
   })
 
 } 

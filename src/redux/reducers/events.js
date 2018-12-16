@@ -3,7 +3,8 @@ import {
   CLOSE_ADD_COMMENT,
   OPEN_SECOND_LEVEL_COMMENT,
   OPEN_THIRD_LEVEL_COMMENT,
-  HANDLE_TEXTFIELD_CHANGE
+  HANDLE_TEXTFIELD_CHANGE,
+  HANDLE_SUBMIT
 } from '../actions/events'
 const STATE = {
   openAddComment: false,
@@ -18,6 +19,11 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       [action.payload.type]: action.payload.value
+    }
+  },
+  [HANDLE_SUBMIT]: (state, action) => {
+    return {
+      ...STATE
     }
   },
   [OPEN_ADD_COMMENT]: (state, action) => {

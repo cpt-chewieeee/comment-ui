@@ -54,9 +54,6 @@ function validComment (comment) {
   return lower.indexOf('script') === -1
 }
 function formatComment (comment) {
-  console.log(comment)
-
-
   return comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
@@ -76,7 +73,7 @@ class App extends Component {
     const { comment, userName, handleSubmit } = this.props
 
     if(comment.length === 0 || userName === 0 || !validComment(comment)) {
-      console.log('invalid or failed', )
+      alert('Invalid comment or username')
       return
     }
     const validString = formatComment(comment)
