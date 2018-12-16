@@ -5,12 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { addComment } from '../redux/actions/events';
 import { connect } from 'react-redux';
-// import IconButton from '@material-ui/core/IconButton';
-// import Avatar from '@material-ui/core/Avatar';
-// import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
-// import SearchIcon from '@material-ui/icons/Search';
-// import MoreIcon from '@material-ui/icons/MoreVert';
 import Fab from '@material-ui/core/Fab';
 
 const styles = theme => {
