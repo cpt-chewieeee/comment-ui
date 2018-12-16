@@ -33,8 +33,6 @@ const ACTION_HANDLERS = {
     }
   },
   [OPEN_THIRD_LEVEL_COMMENT]: (state, action) => {
-    console.log('3rd', action.payload)
-
     return {
       ...state,
       rootId: action.payload.rootId,
@@ -43,7 +41,6 @@ const ACTION_HANDLERS = {
     }
   },
   [OPEN_SECOND_LEVEL_COMMENT]: (state, action) => {
-    console.log('2nd', action.payload)
     return {
       ...state,
       parentId: null,
