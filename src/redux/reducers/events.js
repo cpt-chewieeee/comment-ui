@@ -2,15 +2,24 @@ import {
   OPEN_ADD_COMMENT,
   CLOSE_ADD_COMMENT,
   OPEN_SECOND_LEVEL_COMMENT,
-  OPEN_THIRD_LEVEL_COMMENT
+  OPEN_THIRD_LEVEL_COMMENT,
+  HANDLE_TEXTFIELD_CHANGE
 } from '../actions/events'
 const STATE = {
   openAddComment: false,
   rootId: null,
-  parentId: null
+  parentId: null,
+  userName: '',
+  comment: ''
 }
 
 const ACTION_HANDLERS = {
+  [HANDLE_TEXTFIELD_CHANGE]: (state, action) => {
+    return {
+      ...state,
+      [action.payload.type]: action.payload.value
+    }
+  },
   [OPEN_ADD_COMMENT]: (state, action) => {
     return {
       ...state,

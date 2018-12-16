@@ -38,6 +38,11 @@ const styles = theme => ({
       top: 'auto',
       bottom: 0
     }
+  },
+  dialog: {
+    '& .dialog-content': {
+      width: 200
+    }
   }
 })
 
@@ -71,6 +76,7 @@ class App extends Component {
           <Dialog 
             open={openAddComment}
             TransitionComponent={Transition}
+            className={classes.dialog}
             keepMounted
             onClose={closeAddComment}
             aria-labelledby='add-comment-dialog-title'
@@ -79,7 +85,7 @@ class App extends Component {
             <DialogTitle id='add-comment-dialog-title'>
               Add Comment
             </DialogTitle>
-            <DialogContent>
+            <DialogContent className='dialog-content'>
               <AddComment />
             </DialogContent>
             <DialogActions>
@@ -93,7 +99,6 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log('->', state.eventsStore)
   return {
     openAddComment: state.eventsStore.openAddComment
   }

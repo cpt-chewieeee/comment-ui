@@ -2,6 +2,7 @@ export const OPEN_ADD_COMMENT = 'OPEN_ADD_COMMENT';
 export const CLOSE_ADD_COMMENT = 'CLOSE_ADD_COMMENT';
 export const OPEN_SECOND_LEVEL_COMMENT = 'OPEN_SECOND_LEVEL_COMMENT';
 export const OPEN_THIRD_LEVEL_COMMENT = 'OPEN_THIRD_LEVEL_COMMENT';
+export const HANDLE_TEXTFIELD_CHANGE = 'HANDLE_TEXTFIELD_CHANGE'
 
 export const addComment = () => ({
   type: OPEN_ADD_COMMENT
@@ -17,5 +18,11 @@ export const addThirdLevelComment = (rootId, parentId) => ({
   type: OPEN_THIRD_LEVEL_COMMENT,
   payload: {
     rootId, parentId
+  }
+})
+export const handleTextFieldChange = (type, value) => ({
+  type: HANDLE_TEXTFIELD_CHANGE,
+  payload: {
+    type, value
   }
 })
