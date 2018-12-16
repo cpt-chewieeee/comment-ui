@@ -50,7 +50,12 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 function validComment (comment) {
+  const lower = comment.toLowerCase()
+  return lower.indexOf('script') === -1
+}
+function formatComment (comment) {
   console.log(comment)
+
 
   return comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
@@ -70,11 +75,12 @@ class App extends Component {
     console.log(this.props.comment)
     const { comment, userName, handleSubmit } = this.props
 
-    if(comment.length === 0 || userName === 0) {
+    if(comment.length === 0 || userName === 0 || !validComment(comment)) {
+      console.log('invalid or failed', )
       return
     }
-    const validData = validComment(comment)
-    console.log('validComment', validData)
+    const validString = formatComment(comment)
+    console.log('validComment', validString)
     handleSubmit()
   }
   render() {
@@ -83,6 +89,7 @@ class App extends Component {
     return (
       
         <div className={classes.root}>
+          <img src={'javascript:alert("XSS");'} />
           <Paper className='main-container'>
             <Typography className='header' variant='h5' gutterBottom>
               Comments
@@ -90,6 +97,7 @@ class App extends Component {
             <List />
             <Footer />  
           </Paper>
+
           <Dialog 
             open={openAddComment}
             TransitionComponent={Transition}
