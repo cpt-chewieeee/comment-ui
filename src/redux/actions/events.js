@@ -2,7 +2,8 @@ export const OPEN_ADD_COMMENT = 'OPEN_ADD_COMMENT';
 export const CLOSE_ADD_COMMENT = 'CLOSE_ADD_COMMENT';
 export const OPEN_SECOND_LEVEL_COMMENT = 'OPEN_SECOND_LEVEL_COMMENT';
 export const OPEN_THIRD_LEVEL_COMMENT = 'OPEN_THIRD_LEVEL_COMMENT';
-export const HANDLE_TEXTFIELD_CHANGE = 'HANDLE_TEXTFIELD_CHANGE'
+export const HANDLE_TEXTFIELD_CHANGE = 'HANDLE_TEXTFIELD_CHANGE';
+export const HANDLE_SUBMIT = 'HANDLE_SUBMIT';
 
 export const addComment = () => ({
   type: OPEN_ADD_COMMENT
@@ -26,3 +27,12 @@ export const handleTextFieldChange = (type, value) => ({
     type, value
   }
 })
+export const handleSubmit = () => (dispatch, getState) => {
+  const state = getState().eventsStore
+  const { comment, userName } = state
+  console.log(state)
+  return dispatch({
+    type: HANDLE_SUBMIT
+  })
+
+} 

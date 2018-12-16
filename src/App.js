@@ -14,7 +14,7 @@ import Footer from './components/footer';
 import List from './components/list';
 import { connect } from 'react-redux';
 import AddComment from './components/addComment';
-import { closeAddComment } from './redux/actions/events';
+import { closeAddComment, handleSubmit } from './redux/actions/events';
 import { fetchAllComments } from './redux/actions/comments';
 
 const styles = theme => ({
@@ -49,16 +49,33 @@ const styles = theme => ({
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
+function validComment (comment) {
+  console.log(comment)
 
+  return comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 
 class App extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     openAddComment: PropTypes.bool.isRequired,
-    closeAddComment: PropTypes.func.isRequired
+    closeAddComment: PropTypes.func.isRequired,
+    comment: PropTypes.string,
+    userName: PropTypes.string
   }
   componentDidMount () {
     this.props.fetchAllComments()
+  }
+  handleSubmit = () => {
+    console.log(this.props.comment)
+    const { comment, userName, handleSubmit } = this.props
+
+    if(comment.length === 0 || userName === 0) {
+      return
+    }
+    const validData = validComment(comment)
+    console.log('validComment', validData)
+    handleSubmit()
   }
   render() {
     // console.log(this.props)
@@ -90,7 +107,7 @@ class App extends Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={closeAddComment} color='primary'>Close</Button>
-              <Button onClick={() => console.log('submit')} color='primary'>Submit</Button>
+              <Button onClick={this.handleSubmit} color='primary'>Submit</Button>
             </DialogActions>
           </Dialog>
           
@@ -100,11 +117,14 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   return {
+    comment: state.eventsStore.comment,
+    userName: state.eventsStore.userName,
     openAddComment: state.eventsStore.openAddComment
   }
 }
 const mapDispatchToProps = {
   closeAddComment,
-  fetchAllComments
+  fetchAllComments,
+  handleSubmit
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));
