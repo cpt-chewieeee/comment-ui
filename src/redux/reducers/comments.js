@@ -81,7 +81,8 @@ const ACTION_HANDLERS = {
             ...state.comments[rootId],
             children: newChildren
           }
-        }
+        },
+        lastId: state.lastId + 1
       }
     }
     
