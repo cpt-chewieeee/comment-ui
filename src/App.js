@@ -69,7 +69,6 @@ class App extends Component {
     this.props.fetchAllComments()
   }
   handleSubmit = () => {
-    console.log(this.props.comment)
     const { comment, userName, handleSubmit } = this.props
 
     if(comment.length === 0 || userName === 0 || !validComment(comment)) {
@@ -77,11 +76,9 @@ class App extends Component {
       return
     }
     const validString = formatComment(comment)
-    console.log('validComment', validString)
-    handleSubmit()
+    handleSubmit(validString)
   }
   render() {
-    // console.log(this.props)
     const { classes, openAddComment, closeAddComment } = this.props
     return (
       

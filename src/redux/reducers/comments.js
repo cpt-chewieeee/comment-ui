@@ -17,13 +17,9 @@ const ACTION_HANDLERS = {
     }
   },
   [HANDLE_SUBMIT]: (state, action) => {
+    const { rootId, userName, comment, parentId } = action.payload
 
-    console.log(state, '====>', action.payload)
-    const { rootId, userName, comment } = action.payload
-
-
-    if(rootId === null) {
-
+    if(rootId === null) { // first level comments
       return {
         ...state,
         comments: {
@@ -39,10 +35,56 @@ const ACTION_HANDLERS = {
         },
         lastId: state.lastId + 1
       }
+    } else if(parentId === null) { // second level comments
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [rootId]: {
+            ...state.comments[rootId],
+            children: [
+              ...state.comments[rootId].children,
+              {
+                id: state.lastId,
+                user: userName,
+                dateCreated: new Date(),
+                refComment: rootId,
+                comment: comment,
+                children: []
+              }
+            ]
+          }
+        },
+        lastId: state.lastId + 1
+      }
+    } else { // third level comments
+      const newChildren = state.comments[rootId].children.map(child => {
+        if(child.id === parentId) {
+          child.children = [
+            ...child.children,
+            {
+              id: state.lastId,
+              user: userName,
+              dateCreated: new Date(),
+              refComment: parentId,
+              comment: comment
+            }
+          ]
+        }
+        return child
+      })
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [rootId]: {
+            ...state.comments[rootId],
+            children: newChildren
+          }
+        }
+      }
     }
-    return {
-      ...state
-    }
+    
   }
 }
 
